@@ -16,23 +16,34 @@ namespace DojoDachi.Controllers {
             return View ("Index", dojoDachi);
         }
 
+        [HttpGet ("test")]
+        public JsonResult Test () {
+            return Json (dojoDachi.serialize ());
+        }
+
         [HttpGet ("feed")]
         public IActionResult Feed () {
-            dojoDachi.EatMeal ();
-            if (dojoDachi.HasDied () == true) {
-                return View ("Died", dojoDachi);
+            if (dojoDachi.Meal > 0) {
+                dojoDachi.EatMeal ();
+                if (dojoDachi.HasDied () == true) {
+                    return View ("Died", dojoDachi);
+                }
+                if (dojoDachi.HasWon () == true) {
+                    return View ("Win", dojoDachi);
+                }
+                return View ("Index", dojoDachi);
+            } else {
+                dojoDachi.Log = "You Must work to earn your meals";
+                dojoDachi.Img = "https://pics.me.me/thumb_angry-cat-noises-overview-dotabuff-dota-2-52285737.png";
+                return View ("Index", dojoDachi);
             }
-            if (dojoDachi.HasWon () == true) {
-                return View ("Win", dojoDachi);
-            }
-            return View ("Index", dojoDachi);
         }
 
         [HttpGet ("play")]
         public IActionResult Play () {
             dojoDachi.Playing ();
             if (dojoDachi.HasDied () == true) {
-                return View ("Died",dojoDachi);
+                return View ("Died", dojoDachi);
             }
             if (dojoDachi.HasWon () == true) {
                 return View ("Win", dojoDachi);
@@ -59,7 +70,7 @@ namespace DojoDachi.Controllers {
                 return View ("Died", dojoDachi);
             }
             if (dojoDachi.HasWon () == true) {
-                return View ("Win",dojoDachi);
+                return View ("Win", dojoDachi);
             }
             return View ("Index", dojoDachi);
         }
