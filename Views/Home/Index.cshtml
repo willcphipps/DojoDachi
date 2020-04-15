@@ -1,8 +1,23 @@
-﻿@{
+﻿@model DojoDachi
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-3">Dojodachi</h1>
+        <p class="lead">Here is a dojodachi</p>
+        <hr class="my-2">
+        
+        <p>Meals</p> <progress id="file"  value="@Model.Meal" max="100"> </progress>
+        <p>Fullness</p> <progress id="file"  value="@Model.Fullness" max="100"></progress>
+        <p>Energy</p> <progress id="file"  value="@Model.Energy" max="100"></progress>
+        <p>Happiness</p> <progress id="file"  value="@Model.Happiness" max="100"></progress>
+       
+        <p class="lead">
+            <a href="/play"><button class="btn-dark">play</button></a>
+            <a href="/work"><button class="btn-dark">work</button></a>
+            <a href="/sleep"><button class="btn-dark">sleep</button></a>
+            <a href="/feed"><button class="btn-dark">feed</button></a>
+        </p>
+    </div>
 </div>

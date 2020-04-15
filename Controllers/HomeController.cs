@@ -3,27 +3,72 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using DojoDachi.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DojoDachi.Controllers
-{
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
+namespace DojoDachi.Controllers {
+    public class HomeController : Controller {
+        public static DojoDachi dojoDachi = new DojoDachi ();
+        [HttpGet ("")]
+        public IActionResult Index () {
+
+            return View ("Index", dojoDachi);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
+        [HttpGet ("feed")]
+        public IActionResult Feed () {
+            dojoDachi.EatMeal ();
+            if (dojoDachi.HasDied () == true) {
+                return View ("Died", dojoDachi);
+            }
+            if (dojoDachi.HasWon () == true) {
+                return View ("Win", dojoDachi);
+            }
+            return View ("Index", dojoDachi);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [HttpGet ("play")]
+        public IActionResult Play () {
+            dojoDachi.Playing ();
+            if (dojoDachi.HasDied () == true) {
+                return View ("Died",dojoDachi);
+            }
+            if (dojoDachi.HasWon () == true) {
+                return View ("Win", dojoDachi);
+            }
+            return View ("Index", dojoDachi);
+        }
+
+        [HttpGet ("work")]
+        public IActionResult Work () {
+            dojoDachi.Working ();
+            if (dojoDachi.HasDied () == true) {
+                return View ("Died", dojoDachi);
+            }
+            if (dojoDachi.HasWon () == true) {
+                return View ("Win", dojoDachi);
+            }
+            return View ("Index", dojoDachi);
+        }
+
+        [HttpGet ("sleep")]
+        public IActionResult Sleep () {
+            dojoDachi.Sleeping ();
+            if (dojoDachi.HasDied () == true) {
+                return View ("Died", dojoDachi);
+            }
+            if (dojoDachi.HasWon () == true) {
+                return View ("Win",dojoDachi);
+            }
+            return View ("Index", dojoDachi);
+        }
+
+        [HttpGet ("restart")]
+        public IActionResult Restart () {
+            dojoDachi.Restart ();
+            return View ("Index", dojoDachi);
         }
     }
+
 }

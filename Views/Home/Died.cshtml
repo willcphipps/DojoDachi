@@ -1,0 +1,18 @@
+@model DojoDachi
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-3">You have Died</h1>
+        <p class="lead">Sorry</p>
+        <hr class="my-2">
+        <p>Here are your stats.</p>
+        <p>Meals</p><p>  @Model.Meal</p>
+        <p>Happiness</p><p> @Model.Happiness</p>
+        <p>Fullness</p><p>  @Model.Fullness</p>
+        <p>Energy</p><p>  @Model.Energy</p>
+        <div class="justify"><img src="https://i.makeagif.com/media/11-06-2015/LDMEyF.gif" alt="this">
+        </div>
+        <p class="lead">
+            <a class="btn btn-danger btn-lg" href="/Restart" role="button">Restart</a>
+        </p>
+    </div>
+</div>
